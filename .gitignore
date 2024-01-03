@@ -143,5 +143,3 @@ dist
 # OS
 ## Mac
 .DS_Store
-
-server.ts
