@@ -1,0 +1,3606 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "auth"
+    },
+    {
+      "name": "competitions"
+    },
+    {
+      "name": "worldstate"
+    },
+    {
+      "name": "issuer"
+    },
+    {
+      "name": "leaderboards"
+    },
+    {
+      "name": "notifications"
+    },
+    {
+      "name": "signals"
+    },
+    {
+      "name": "other"
+    }
+  ],
+  "paths": {
+    "/api/v1/auth": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "216d28d22382d463a2e7789eg1126506f66745a7563654fd51ff1fb93537be13"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "0xd62ba9E54C3348ccA77a0c1d27631366a30f76b9"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "description",
+                      "nullable": true
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "name",
+                      "nullable": true
+                    },
+                    "performance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "performanceClosed": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "avgPerformance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "mo": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "stakedAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "possibleNewForecasts": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "signalsAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "signalsAmountClosed": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "lastTransaction": {
+                      "type": "object",
+                      "example": {
+                        "status": "pending",
+                        "details": {
+                          "type": "deposit",
+                          "amount": 50,
+                          "timestamp": "2021-05-31T14:07:39.570Z",
+                          "waiting": 0.5,
+                          "totalWaiting": 0.5
+                        },
+                        "timestamp": "2021-05-31T14:07:39.570Z"
+                      },
+                      "nullable": true
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "type",
+                      "nullable": true
+                    },
+                    "dailyNotificationsEnabled": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "GDPR": {
+                      "type": "string",
+                      "example": "type",
+                      "nullable": true
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2020-08-12T08:57:33.603Z",
+                      "format": "date-time"
+                    },
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJhZGRyZXNzIjoiMTExMTEiLCJ1c2VybmFtZSI6bnVsbCwicGVyZm9ybWFuY2UiOjAsIm1vIjowLCJpYXQiOjE1OTc2NzUxMzksImV4cCI6MTk1OTc2NzUxMzl9.cwAyEu4GQbpBscRC8PesiqOBs_DGitbA8pz7yzeqiJM"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJhZGRyZXNzIjoiMTExMTEiLCJ1c2VybmFtZSI6bnVsbCwicGVyZm9ybWFuY2UiOjAsIm1vIjowLCJpYXQiOjE1OTc2NzUxMzksImV4cCI6MTk1OTc2NzUxMzl9.cwAyEu4GQbpBscRC8PesiqOBs_DGitbA8pz7yzeqiJM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/AUTH_CODE_NOT_FOUND"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "originalMessage": {
+                    "type": "string"
+                  },
+                  "signedMessage": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "originalMessage",
+                  "signedMessage"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "api/v1/auth"
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "0xd62ba9E54C3348ccA77a0c1d2763fb66a31376b9"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "name",
+                      "nullable": true
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "name",
+                      "nullable": true
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "example": "avatar",
+                      "nullable": true
+                    },
+                    "performance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "performanceClosed": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "avgPerformance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "mo": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "stakedAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "possibleNewForecasts": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "signalsAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "signalsAmountClosed": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "lastTransaction": {
+                      "type": "object",
+                      "example": {
+                        "status": "pending",
+                        "details": {
+                          "type": "deposit",
+                          "amount": 50,
+                          "timestamp": "2021-05-31T14:07:39.570Z",
+                          "waiting": 0.5,
+                          "totalWaiting": 0.5
+                        },
+                        "timestamp": "2021-05-31T14:07:39.570Z"
+                      },
+                      "nullable": true
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "type",
+                      "nullable": true
+                    },
+                    "dailyNotificationsEnabled": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "GDPR": {
+                      "type": "string",
+                      "example": "type",
+                      "nullable": true
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2020-08-12T08:57:33.603Z",
+                      "format": "date-time"
+                    },
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJhZGRyZXNzIjoiMTExMTEiLCJ1c2VybmFtZSI6bnVsbCwicGVyZm9ybWFuY2UiOjAsIm1vIjowLCJpYXQiOjE1OTc2NzUxMzksImV4cCI6MTk1OTc2NzUxMzl9.cwAyEu4GQbpBscRC8PesiqOBs_DGitbA8pz7yzeqiJM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "refreshToken"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/worldstate": {
+      "get": {
+        "tags": [
+          "worldstate"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "signalsSmartContractAddress": {
+                      "type": "string",
+                      "example": "0xe01480471670F58D383fA5C6fC308C66008Fa3A0"
+                    },
+                    "openForecasts": {
+                      "type": "integer"
+                    },
+                    "totalForecasts": {
+                      "type": "integer"
+                    },
+                    "totalIssuers": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/issuer": {
+      "get": {
+        "tags": [
+          "issuer"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "string"
+                    },
+                    "username": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": "username"
+                    },
+                    "description": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": "description"
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": "avatar"
+                    },
+                    "performance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "performanceClosed": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "avgPerformance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "mo": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "stakedAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "possibleNewForecasts": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "signalsAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "signalsAmountClosed": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "type": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": "type"
+                    },
+                    "dailyNotificationsEnabled": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "GDPR": {
+                      "type": "string",
+                      "example": "2020-08-12T08:57:33.603Z",
+                      "format": "date-time"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2020-08-12T08:57:33.603Z",
+                      "format": "date-time"
+                    },
+                    "iat": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 1622490468
+                    },
+                    "exp": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 1623700068
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "issuer"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "string"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "username"
+                    },
+                    "performance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "mo": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "stakedAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "possibleNewForecasts": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BAD_DATA"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "originalMessage": {
+                    "description": "username",
+                    "type": "string"
+                  },
+                  "signedMessage": {
+                    "description": "description",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/issuer/withdraw": {
+      "post": {
+        "tags": [
+          "issuer"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "0xd62ba9E54C3348ccA77a0c1d2763fb66a30f76b9"
+                    },
+                    "username": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": "username"
+                    },
+                    "description": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": "description"
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "performance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "performanceClosed": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "avgPerformance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "mo": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "stakedAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 25
+                    },
+                    "possibleNewForecasts": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 5
+                    },
+                    "signalsAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 6
+                    },
+                    "signalsAmountClosed": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 5
+                    },
+                    "lastTransaction": {
+                      "type": "object",
+                      "nullable": true,
+                      "example": {}
+                    },
+                    "type": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": null
+                    },
+                    "dailyNotificationsEnabled": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "GDPR": {
+                      "type": "string",
+                      "example": "2020-08-12T08:57:33.603Z",
+                      "format": "date-time"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2020-08-12T08:57:33.603Z",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/issuer/deposit": {
+      "post": {
+        "tags": [
+          "issuer"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "2"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "0x36D4516398A641aF8c73c050Ab9b6f713612C6eE"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "username",
+                      "nullable": true
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "description",
+                      "nullable": true
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "example": "description",
+                      "nullable": true
+                    },
+                    "performance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "performanceClosed": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "avgPerformance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "mo": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "stakedAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "possibleNewForecasts": {
+                      "type": "integer",
+                      "example": 0
+                    },
+                    "signalsAmount": {
+                      "type": "integer",
+                      "example": 0
+                    },
+                    "signalsAmountClosed": {
+                      "type": "integer",
+                      "example": 0
+                    },
+                    "lastTransaction": {
+                      "type": "object",
+                      "nullable": true,
+                      "example": {
+                        "status": "pending",
+                        "details": {
+                          "type": "deposit",
+                          "amount": 50,
+                          "timestamp": "2021-05-31T14:07:39.570Z",
+                          "waiting": 0.5,
+                          "totalWaiting": 0.5
+                        },
+                        "timestamp": "2021-05-31T14:07:39.570Z"
+                      }
+                    },
+                    "GDPR": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true,
+                      "example": "2020-08-12T08:57:33.603Z"
+                    },
+                    "type": {
+                      "type": "string",
+                      "nullable": true,
+                      "example": "type"
+                    },
+                    "dailyNotificationsEnabled": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2020-08-12T08:57:33.603Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "minimum": 1,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "amount"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/issuer/avatar": {
+      "post": {
+        "tags": [
+          "issuer"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "string"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "username"
+                    },
+                    "performance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "mo": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "stakedAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "nullable": true,
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "nullable": true,
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/issuer/gdpr": {
+      "post": {
+        "tags": [
+          "issuer"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "0xd62ba9E54C3348ccA77a0c1d2763fb66a30136b9"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "username",
+                      "nullable": true
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "description",
+                      "nullable": true
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "example": "avatar",
+                      "nullable": true
+                    },
+                    "performance": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "performanceClosed": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "avgPerformance": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "mo": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "stakedAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "signalsAmountClosed": {
+                      "type": "integer",
+                      "example": 0
+                    },
+                    "lastTransaction": {
+                      "type": "object",
+                      "example": {
+                        "status": "pending",
+                        "details": {
+                          "type": "deposit",
+                          "amount": 50,
+                          "timestamp": "2021-05-31T14:07:39.570Z",
+                          "waiting": 0.5,
+                          "totalWaiting": 0.5
+                        },
+                        "timestamp": "2021-05-31T14:07:39.570Z"
+                      },
+                      "nullable": true
+                    },
+                    "GDPR": {
+                      "type": "string",
+                      "example": "2020-08-12T08:57:33.603Z",
+                      "format": "date-time"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "type",
+                      "nullable": true
+                    },
+                    "dailyNotificationsEnabled": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2020-08-12T08:57:33.603Z",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        }
+      }
+    },
+    "/api/v1/issuer/queue": {
+      "get": {
+        "tags": [
+          "issuer"
+        ],
+        "responses": {
+          "200": {
+            "description": "need to refactor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "queue": {
+                      "type": "string",
+                      "example": "1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/competitions": {
+      "get": {
+        "tags": [
+          "competitions"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/competition"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": "1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1
+            }
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "competitions"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/competition"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "example": "1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BAD_DATA"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          },
+          "403": {
+            "$ref": "#/components/responses/ACCESS_DENIED"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "endDate": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "startDate"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/competitions/{competitionId}": {
+      "put": {
+        "tags": [
+          "competitions"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/competition"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BAD_DATA"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          },
+          "403": {
+            "$ref": "#/components/responses/ACCESS_DENIED"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "endDate": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/competitions/{competitionId}/issuers": {
+      "get": {
+        "tags": [
+          "competitions"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/issuers"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "example": "1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/COMPETITION_NOT_FOUND"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "competitionId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "skip",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "take",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "allowReserved": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/api/v1/competitions/{competitionId}/forecasts": {
+      "get": {
+        "tags": [
+          "competitions"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/competitionSignalSnapshotWithForecasts"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 6
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/COMPETITION_NOT_FOUND"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "competitionId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        {
+          "name": "skip",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "take",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "allowReserved": true,
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/api/v1/competitions/{competitionId}/forecasts/{originalId}": {
+      "get": {
+        "tags": [
+          "competitions"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/competitionSignalSnapshotWithForecasts"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/COMPETITION_NOT_FOUND"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "competitionId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        {
+          "name": "originalId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ]
+    },
+    "/api/v1/leaderboards/forecasts/{signalId}": {
+      "get": {
+        "tags": [
+          "leaderboards"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/signal"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BAD_DATA"
+          }
+        },
+        "parameters": [
+          {
+            "name": "signalID",
+            "in": "query",
+            "description": "1",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "signalId",
+            "in": "path",
+            "description": "1",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/leaderboards/forecasts": {
+      "get": {
+        "tags": [
+          "leaderboards"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/closedSignals"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 12
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "2",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "4",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/leaderboards/players/{username}/forecasts": {
+      "get": {
+        "tags": [
+          "leaderboards"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/closedSignals"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 12
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          }
+        },
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "open",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "open",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "4",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "description": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "allowReserved": true,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/leaderboards/{playerId}/signals": {
+      "get": {
+        "tags": [
+          "leaderboards"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/closedSignals"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 100
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/COMPETITION_NOT_FOUND"
+          }
+        },
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "1",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "1",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/leaderboards/players": {
+      "get": {
+        "tags": [
+          "leaderboards"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 11
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/issuersWithPlayerId"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "1",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "1",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "sort",
+            "allowReserved": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/leaderboards/players/{username}/subscribe": {
+      "post": {
+        "tags": [
+          "leaderboards"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscription"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/leaderboards/players/{username}": {
+      "get": {
+        "tags": [
+          "leaderboards"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "example": "0xd62ba9E54C3348ccA77a0c1d2763fb66a30f76b9",
+                      "nullable": true
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "test_description",
+                      "nullable": true
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "example": null,
+                      "nullable": true
+                    },
+                    "joinedAt": {
+                      "type": "string",
+                      "example": "2020-08-12T08:57:33.603Z",
+                      "format": "date-time"
+                    },
+                    "signalsStakedAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "signalsStakedAmountClosed": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "signalsStakedPerformance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "signalsStakedPerformanceClosed": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "followersAmount": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          }
+        },
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/leaderboards/players/{username}/unsubscribe": {
+      "post": {
+        "tags": [
+          "leaderboards"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscription"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/leaderboards/players/{username}/writeNote": {
+      "post": {
+        "tags": [
+          "leaderboards"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/note"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "description": "text",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ping": {
+      "get": {
+        "tags": [
+          "other"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "version": {
+                      "type": "string",
+                      "example": "0.1.46"
+                    },
+                    "env": {
+                      "type": "string",
+                      "example": "undefined"
+                    },
+                    "gasPrice": {
+                      "type": "object",
+                      "properties": {
+                        "web3": {
+                          "type": "number",
+                          "example": 10
+                        },
+                        "ethgasstation": {
+                          "type": "number",
+                          "example": 12
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/coins": {
+      "get": {
+        "tags": [
+          "other"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "coingeco": {
+                      "type": "object",
+                      "properties": {
+                        "BTC/USD": {
+                          "type": "string",
+                          "example": "bitcoin"
+                        },
+                        "ETH/USD": {
+                          "type": "string",
+                          "example": "ethereum"
+                        },
+                        "ADA/BTC": {
+                          "type": "string",
+                          "example": "cardano"
+                        },
+                        "BAL/BTC": {
+                          "type": "string",
+                          "example": "balancer"
+                        },
+                        "BAND/BTC": {
+                          "type": "string",
+                          "example": "band-protocol"
+                        },
+                        "BNB/BTC": {
+                          "type": "string",
+                          "example": "binancecoin"
+                        },
+                        "COMP/BTC": {
+                          "type": "string",
+                          "example": "compound-governance-token"
+                        },
+                        "KNC/BTC": {
+                          "type": "string",
+                          "example": "kyber-network"
+                        },
+                        "AAVE/BTC": {
+                          "type": "string",
+                          "example": "aave"
+                        },
+                        "LINK/BTC": {
+                          "type": "string",
+                          "example": "chainlink"
+                        },
+                        "MKR/BTC": {
+                          "type": "string",
+                          "example": "maker"
+                        },
+                        "REN/BTC": {
+                          "type": "string",
+                          "example": "republic-protocol"
+                        },
+                        "REP/BTC": {
+                          "type": "string",
+                          "example": "augur"
+                        },
+                        "SNX/BTC": {
+                          "type": "string",
+                          "example": "havven"
+                        },
+                        "UNI/BTC": {
+                          "type": "string",
+                          "example": "uniswap"
+                        },
+                        "YFI/BTC": {
+                          "type": "string",
+                          "example": "yearn-finance"
+                        },
+                        "BADGER/BTC": {
+                          "type": "string",
+                          "example": "badger-dao"
+                        },
+                        "BNT/BTC": {
+                          "type": "string",
+                          "example": "bancor"
+                        },
+                        "LRC/BTC": {
+                          "type": "string",
+                          "example": "loopring"
+                        },
+                        "ENJ/BTC": {
+                          "type": "string",
+                          "example": "enjin-coin"
+                        },
+                        "ZRX/BTC": {
+                          "type": "string",
+                          "example": "0x"
+                        },
+                        "CRV/BTC": {
+                          "type": "string",
+                          "example": "curve"
+                        },
+                        "ORN/BTC": {
+                          "type": "string",
+                          "example": "orion-protocol"
+                        },
+                        "DOT/BTC": {
+                          "type": "string",
+                          "example": "polkadot-new"
+                        },
+                        "SUSHI/BTC": {
+                          "type": "string",
+                          "example": "sushi"
+                        },
+                        "DODO/BTC": {
+                          "type": "string",
+                          "example": "dodo"
+                        },
+                        "1INCH/BTC": {
+                          "type": "string",
+                          "example": "1inch"
+                        }
+                      }
+                    },
+                    "santi": {
+                      "type": "object",
+                      "properties": {
+                        "BTC/USD": {
+                          "type": "string",
+                          "example": "bitcoin"
+                        },
+                        "ETH/USD": {
+                          "type": "string",
+                          "example": "ethereum"
+                        },
+                        "ADA/BTC": {
+                          "type": "string",
+                          "example": "cardano"
+                        },
+                        "BAL/BTC": {
+                          "type": "string",
+                          "example": "balancer"
+                        },
+                        "BAND/BTC": {
+                          "type": "string",
+                          "example": "band-protocol"
+                        },
+                        "BNB/BTC": {
+                          "type": "string",
+                          "example": "binancecoin"
+                        },
+                        "COMP/BTC": {
+                          "type": "string",
+                          "example": "compound-governance-token"
+                        },
+                        "KNC/BTC": {
+                          "type": "string",
+                          "example": "kyber-network"
+                        },
+                        "AAVE/BTC": {
+                          "type": "string",
+                          "example": "aave"
+                        },
+                        "LINK/BTC": {
+                          "type": "string",
+                          "example": "chainlink"
+                        },
+                        "MKR/BTC": {
+                          "type": "string",
+                          "example": "maker"
+                        },
+                        "REN/BTC": {
+                          "type": "string",
+                          "example": "republic-protocol"
+                        },
+                        "REP/BTC": {
+                          "type": "string",
+                          "example": "augur"
+                        },
+                        "SNX/BTC": {
+                          "type": "string",
+                          "example": "havven"
+                        },
+                        "UNI/BTC": {
+                          "type": "string",
+                          "example": "uniswap"
+                        },
+                        "YFI/BTC": {
+                          "type": "string",
+                          "example": "yearn-finance"
+                        },
+                        "BADGER/BTC": {
+                          "type": "string",
+                          "example": "badger-dao"
+                        },
+                        "BNT/BTC": {
+                          "type": "string",
+                          "example": "bancor"
+                        },
+                        "LRC/BTC": {
+                          "type": "string",
+                          "example": "loopring"
+                        },
+                        "ENJ/BTC": {
+                          "type": "string",
+                          "example": "enjin-coin"
+                        },
+                        "ZRX/BTC": {
+                          "type": "string",
+                          "example": "0x"
+                        },
+                        "CRV/BTC": {
+                          "type": "string",
+                          "example": "curve"
+                        },
+                        "ORN/BTC": {
+                          "type": "string",
+                          "example": "orion-protocol"
+                        },
+                        "DOT/BTC": {
+                          "type": "string",
+                          "example": "polkadot-new"
+                        },
+                        "SUSHI/BTC": {
+                          "type": "string",
+                          "example": "sushi"
+                        },
+                        "DODO/BTC": {
+                          "type": "string",
+                          "example": "dodo"
+                        },
+                        "1INCH/BTC": {
+                          "type": "string",
+                          "example": "1inch"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notifications": {
+      "get": {
+        "tags": [
+          "notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/notification"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "unreadTotal": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "unreadTotalAll": {
+                      "type": "integer",
+                      "format": "int64"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "sort",
+            "allowReserved": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unreadOnly",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "allowReserved": true,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notification"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "someField": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "someField"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/issuers"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ISSUER_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subscribed": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "subscribed"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/{notificationId}/read": {
+      "put": {
+        "tags": [
+          "notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/issuerNotificationLink"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/NOTIFICATION_LINK_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "notificationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/signals": {
+      "get": {
+        "tags": [
+          "signals"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 11
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/signal"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "signals"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/signal"
+          },
+          "400": {
+            "$ref": "#/components/responses/BAD_DATA"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "issuerAddress": {
+                    "type": "string"
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "direction": {
+                    "type": "string"
+                  },
+                  "stopLossPrice": {
+                    "type": "number"
+                  },
+                  "takeProfitPrice": {
+                    "type": "number"
+                  },
+                  "issuerSignature": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "issuerSignature",
+                  "symbol",
+                  "direction"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/signals/{signalId}/close": {
+      "put": {
+        "tags": [
+          "signals"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/signal"
+          },
+          "400": {
+            "$ref": "#/components/responses/SIGNAL_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "signalId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "issuersSignature": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/signals/{signalId}": {
+      "put": {
+        "tags": [
+          "signals"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/signal"
+          },
+          "400": {
+            "$ref": "#/components/responses/SIGNAL_NOT_FOUND"
+          },
+          "401": {
+            "$ref": "#/components/responses/MISSING_AUTHORIZATION_HEADER"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "signalId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "stopLossPrice": {
+                    "type": "number"
+                  },
+                  "takeProfitPrice": {
+                    "type": "number"
+                  },
+                  "issuerSignature": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "issuerSignature"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "sanr",
+    "version": "2.0.0"
+  },
+  "externalDocs": {
+    "url": "https://api-sanr.santiment.net"
+  },
+  "servers": [
+    {
+      "url": "https://"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "parameters": {
+      "auth": {
+        "name": "Authorization",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "authNotRequired": {
+        "name": "Authorization",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "AUTH_CODE_NOT_FOUND": {
+        "description": "bad data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "AUTH_CODE_NOT_FOUND"
+                },
+                "stack": {
+                  "type": "string",
+                  "example": "AppError: AUTH_CODE_NOT_FOUND\\n    at recoverSignedAuthCode (D:\\\\git\\\\app\\\\oracle\\\\routes\\\\auth\\\\recoverSignedAuthCode.js:19:31)"
+                },
+                "details": {
+                  "type": "object"
+                },
+                "error": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NOTIFICATION_LINK_NOT_FOUND": {
+        "description": "bad data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "NOTIFICATION_LINK_NOT_FOUND"
+                },
+                "stack": {
+                  "type": "string",
+                  "example": "AppError: NOTIFICATION_LINK_NOT_FOUND\\n    at recoverSignedAuthCode (D:\\\\git\\\\app\\\\oracle\\\\routes\\\\auth\\\\recoverSignedAuthCode.js:19:31)"
+                },
+                "details": {
+                  "type": "object"
+                },
+                "error": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ISSUER_NOT_FOUND": {
+        "description": "bad data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "ISSUER_NOT_FOUND"
+                },
+                "stack": {
+                  "type": "string",
+                  "example": "AppError: ISSUER_NOT_FOUND\\n    at recoverSignedAuthCode (D:\\\\git\\\\app\\\\oracle\\\\routes\\\\auth\\\\recoverSignedAuthCode.js:19:31)"
+                },
+                "details": {
+                  "type": "object"
+                },
+                "error": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "SIGNAL_NOT_FOUND": {
+        "description": "bad data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "SIGNAL_NOT_FOUND"
+                },
+                "stack": {
+                  "type": "string",
+                  "example": "AppError: SIGNAL_NOT_FOUND\\n    at recoverSignedAuthCode (D:\\\\git\\\\app\\\\oracle\\\\routes\\\\auth\\\\recoverSignedAuthCode.js:19:31)"
+                },
+                "details": {
+                  "type": "object"
+                },
+                "error": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "COMPETITION_NOT_FOUND": {
+        "description": "bad data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "COMPETITION_NOT_FOUND"
+                },
+                "stack": {
+                  "type": "string",
+                  "example": "AppError: COMPETITION_NOT_FOUND\\n    at recoverSignedAuthCode (D:\\\\git\\\\app\\\\oracle\\\\routes\\\\auth\\\\recoverSignedAuthCode.js:19:31)"
+                },
+                "details": {
+                  "type": "object"
+                },
+                "error": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BAD_DATA": {
+        "description": "bad data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "BAD_DATA"
+                },
+                "stack": {
+                  "type": "string",
+                  "example": "AppError: BAD_DATA\\n    at recoverSignedAuthCode (D:\\\\git\\\\app\\\\oracle\\\\routes\\\\auth\\\\recoverSignedAuthCode.js:19:31)"
+                },
+                "details": {
+                  "type": "object"
+                },
+                "error": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "MISSING_AUTHORIZATION_HEADER": {
+        "description": "unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "MISSING_AUTHORIZATION_HEADER"
+                },
+                "stack": {
+                  "type": "string",
+                  "example": "AppError: MISSING_AUTHORIZATION_HEADER\\n    at recoverSignedAuthCode (D:\\\\git\\\\app\\\\oracle\\\\routes\\\\auth\\\\recoverSignedAuthCode.js:19:31)"
+                },
+                "details": {
+                  "type": "object"
+                },
+                "error": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ACCESS_DENIED": {
+        "description": "forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "ACCESS_DENIED"
+                },
+                "stack": {
+                  "type": "string",
+                  "example": "AppError: ACCESS_DENIED\\n    at recoverSignedAuthCode (D:\\\\git\\\\app\\\\oracle\\\\routes\\\\auth\\\\recoverSignedAuthCode.js:19:31)"
+                },
+                "details": {
+                  "type": "object"
+                },
+                "error": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "signal": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/signal"
+            }
+          }
+        }
+      },
+      "competition": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/competition"
+            }
+          }
+        }
+      },
+      "subscription": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/subscription"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "auth": {
+        "type": "string"
+      },
+      "signal": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "signalID": {
+            "type": "string",
+            "example": null,
+            "nullable": true
+          },
+          "issuerId": {
+            "type": "string",
+            "example": null,
+            "nullable": true
+          },
+          "issuerAddress": {
+            "type": "string",
+            "example": "0xd62ba9E54C3348ccA77a0c1d2712fb66a30f76b9"
+          },
+          "symbol": {
+            "type": "string",
+            "example": "BTC/USD"
+          },
+          "direction": {
+            "type": "string",
+            "example": "up"
+          },
+          "status": {
+            "type": "string",
+            "example": "open"
+          },
+          "closeType": {
+            "type": "string",
+            "example": "user_closed_signal",
+            "nullable": true
+          },
+          "stopLossPrice": {
+            "type": "number",
+            "example": 1e-11,
+            "nullable": true
+          },
+          "takeProfitPrice": {
+            "type": "number",
+            "example": 1e-11,
+            "nullable": true
+          },
+          "signalOpenDate": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "format": "date-time"
+          },
+          "signalCloseDate": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "format": "date-time",
+            "nullable": true
+          },
+          "signalOpenPrice": {
+            "type": "number",
+            "format": "float",
+            "example": 36550.6
+          },
+          "signalClosePrice": {
+            "type": "number",
+            "format": "float",
+            "example": 36550.6
+          },
+          "performance": {
+            "type": "number",
+            "format": "float",
+            "example": 0
+          },
+          "maxPrice": {
+            "type": "number",
+            "format": "float",
+            "example": 36550.6
+          },
+          "minPrice": {
+            "type": "number",
+            "format": "float",
+            "example": 36550.6
+          }
+        }
+      },
+      "competition": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "issuerAddress": {
+            "type": "string",
+            "example": "string"
+          },
+          "status": {
+            "type": "string",
+            "example": "pending"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-04-10T20:24:43.000Z"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-04-10T23:24:43.000Z"
+          }
+        }
+      },
+      "subscription": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "issuerId": {
+            "type": "string",
+            "example": "1"
+          },
+          "username": {
+            "type": "string",
+            "example": "subscriber_username",
+            "nullable": true
+          },
+          "issuerAddress": {
+            "type": "string",
+            "example": "0xd62ba9E54C3348ccA77a0c1d2123fb66a30f76b9"
+          },
+          "issuerUsername": {
+            "type": "string",
+            "example": "test_username"
+          },
+          "subscriberId": {
+            "type": "string",
+            "example": "2"
+          },
+          "subscriberAddress": {
+            "type": "string",
+            "example": "0x36D4516398A641aF8c73c050Ab928f732612C6eE"
+          },
+          "subscriberUsername": {
+            "type": "string",
+            "example": "subscriber_username",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "format": "date-time"
+          }
+        }
+      },
+      "note": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "text": {
+            "type": "string",
+            "example": "test_note"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "format": "date-time"
+          }
+        }
+      },
+      "issuerNotificationLink": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "issuersId": {
+            "type": "string",
+            "example": "1"
+          },
+          "notificationId": {
+            "type": "string",
+            "example": "1"
+          },
+          "read": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "notification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "type": {
+            "type": "string",
+            "example": "news"
+          },
+          "date": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "format": "date-time"
+          },
+          "details": {
+            "type": "object",
+            "example": {
+              "somefield": "someValue"
+            }
+          }
+        }
+      },
+      "competitionSignalSnapshot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true,
+            "example": "0xd62ba9E54C3348ccA77a0c1d2763fb66a30f76b9"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true,
+            "example": "username"
+          },
+          "performance": {
+            "type": "number",
+            "example": 0
+          },
+          "direction": {
+            "type": "string",
+            "example": "up"
+          },
+          "status": {
+            "type": "string",
+            "example": "open"
+          },
+          "issuerAddress": {
+            "type": "string",
+            "example": "string"
+          },
+          "volatility": {
+            "type": "number",
+            "example": 4
+          },
+          "reward": {
+            "type": "number",
+            "example": 4
+          },
+          "originalId": {
+            "type": "number",
+            "example": 4
+          },
+          "competitionId": {
+            "type": "number",
+            "example": 4
+          },
+          "stopLossPrice": {
+            "type": "number",
+            "example": 4
+          },
+          "takeProfitPrice": {
+            "type": "number",
+            "example": 4
+          }
+        }
+      },
+      "competitionSignalSnapshotWithForecasts": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "issuerId": {
+            "type": "string",
+            "nullable": true,
+            "example": "1"
+          },
+          "issuerAddress": {
+            "type": "string",
+            "nullable": true,
+            "example": null
+          },
+          "symbol": {
+            "type": "string",
+            "example": "BTC/USD"
+          },
+          "direction": {
+            "type": "string",
+            "example": "up"
+          },
+          "status": {
+            "type": "string",
+            "example": "open"
+          },
+          "originalId": {
+            "type": "string",
+            "nullable": true,
+            "example": "5"
+          },
+          "competitionId": {
+            "type": "string",
+            "nullable": true,
+            "example": "1"
+          },
+          "stopLossPrice": {
+            "type": "number",
+            "nullable": true,
+            "example": 1e-11
+          },
+          "takeProfitPrice": {
+            "type": "number",
+            "nullable": true,
+            "example": 10000000000
+          },
+          "signalOpenDate": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "nullable": true,
+            "format": "date-time"
+          },
+          "signalCloseDate": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "nullable": true,
+            "format": "date-time"
+          },
+          "signalOpenPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "example": 36523.42458657802
+          },
+          "signalClosePrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "example": 36523.42458657802
+          },
+          "competitionStartPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "example": 36523.42458657802
+          },
+          "competitionEndPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "example": 36523.42458657802
+          },
+          "competitionPerformance": {
+            "type": "number",
+            "nullable": true,
+            "example": 0
+          },
+          "username": {
+            "type": "string",
+            "nullable": true,
+            "example": "username"
+          },
+          "signalID": {
+            "type": "string",
+            "nullable": true,
+            "example": "1488"
+          },
+          "performance": {
+            "type": "number",
+            "example": 0
+          },
+          "competitionStartDate": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "nullable": true,
+            "format": "date-time"
+          },
+          "competitionEndDate": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "nullable": true,
+            "format": "date-time"
+          }
+        }
+      },
+      "closedSignals": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "example": "user"
+          },
+          "token": {
+            "type": "string",
+            "example": "symbol"
+          },
+          "direction": {
+            "type": "string",
+            "example": "direction"
+          },
+          "performance": {
+            "type": "number",
+            "format": "float",
+            "example": 12.3
+          },
+          "status": {
+            "type": "string",
+            "example": "open"
+          }
+        }
+      },
+      "issuers": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1"
+          },
+          "address": {
+            "type": "string",
+            "example": "0xd62ba9E54C3348ccA77a0c1d2763fb66a30f76b9"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true,
+            "example": "username"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "example": "description"
+          },
+          "performance": {
+            "type": "number",
+            "example": 0
+          },
+          "performanceClosed": {
+            "type": "number",
+            "example": 0
+          },
+          "signalsAmountClosed": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "avgPerformance": {
+            "type": "number",
+            "example": 0
+          },
+          "mo": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "stakedAmount": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "possibleNewForecasts": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "signalsAmount": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "lastTransaction": {
+            "type": "object",
+            "nullable": true,
+            "example": null
+          },
+          "type": {
+            "type": "string",
+            "nullable": true,
+            "example": null
+          },
+          "dailyNotificationsEnabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "GDPR": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-05-31T15:18:46.940Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-05-31T15:18:46.940Z"
+          }
+        }
+      },
+      "fullIssuer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "address": {
+            "type": "string",
+            "example": "address"
+          },
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "description": {
+            "type": "string",
+            "example": "description"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "avatar"
+          },
+          "performance": {
+            "format": "float",
+            "type": "number",
+            "example": 0
+          },
+          "performanceClosed": {
+            "type": "string",
+            "example": "performanceClosed"
+          },
+          "avgPerformance": {
+            "format": "float",
+            "type": "number",
+            "example": 0
+          },
+          "mo": {
+            "format": "float",
+            "type": "number",
+            "example": 0
+          },
+          "stakedAmount": {
+            "type": "integer",
+            "example": 0
+          },
+          "possibleNewForecasts": {
+            "type": "integer",
+            "example": 0
+          },
+          "signalsAmount": {
+            "type": "integer",
+            "example": 0
+          },
+          "signalsAmountClosed": {
+            "type": "integer",
+            "example": 0
+          },
+          "lastTransaction": {
+            "type": "object",
+            "nullable": true,
+            "example": {
+              "status": "pending",
+              "details": {
+                "type": "deposit",
+                "amount": 50,
+                "timestamp": "2021-05-31T14:07:39.570Z",
+                "waiting": 0.5,
+                "totalWaiting": 0.5
+              },
+              "timestamp": "2021-05-31T14:07:39.570Z"
+            }
+          },
+          "GDPR": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-08-12T08:57:33.603Z"
+          },
+          "type": {
+            "type": "string",
+            "example": "type"
+          },
+          "dailyNotificationsEnabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2020-08-12T08:57:33.603Z",
+            "format": "date-time"
+          }
+        }
+      },
+      "issuersWithPlayerId": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "example": "username"
+          },
+          "since": {
+            "type": "string"
+          },
+          "forecasts": {
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "mo": {
+            "type": "number",
+            "format": "float",
+            "example": 1.5
+          },
+          "total": {
+            "type": "number",
+            "format": "float",
+            "example": 11.3
+          },
+          "playerId": {
+            "type": "string",
+            "example": "1"
+          }
+        }
+      }
+    }
+  }
+}
